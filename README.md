@@ -167,8 +167,39 @@ Before we model, we want to understand our data. The first thing to check is our
 
 ![](images/target_distribution.png)
 
+By looking at our graph, we know we have some class imbalance. We'll want to address this when running our model.
+
+Our EDA also includes addressing null values in the user rating columns. We don't want to lose observations here, so instead we will fill these null values by creating a weight which is our average expert score divided by the average user score. With this weight, we multiply the expert score for an observation by the weight to get a suitable user score.
+
+We checked for correlation between the flavor profiles. We'll want to address multicollinearity and these features could potentailly explain one another.
+
+![](images/flavor_correlation.png)
+
+Smoky and peaty for example and 1 for 1. We'll want to use one of these in our classifier models.
+
+Another feature with null values is cask. We want to make the most of this column since it's instrumental in the whiskey making process. We have the 'style' column that, in some instances, tell us the cask type. We went through and pulled out the casks where we could. When we checked the number of unique values in this column, we found we had 761. Because these values are user input, we had the same value just written different ways for many of them. We created a new column called 'cask_category' to parse through and find the key words to identify the cask. After we were able to get, we created dummies for this categorical variable. We have a catch all 'other' category for any observations that didn't have a specified cask or one off value.
+
+We wanted to check for relationships between our features. The price, expert_score & user_rating were a good place to start. When looking at the breakout of our price data, we saw that American whiskeys are more often in the lower price ranges and Scotch & Japanese whiskey are more expensive. We created the 'big_ticket' column to capture this pattern.
+
+![](images/price_by_country.png)
+
+We checked the relationship between price and expert_score, expecting that as the price went up, so did the expert_score. Overall, American whiskeys tended to have less favorable scores, so we added another new feature 'poor_performance' to track this.
+
+![](images/price_expert.png)
+
+Another indication we wanted to look into was the price & user_rating. One thing that stuck out was that for the most expensive bucket, Irish whiskey was noticeably higher rated. With this insight, we added the 'people_love_this' column. 
+
+![](images/price_user.png)
+
+In addition to these features, we also tracked the cask makeup of our data by country. Oak is overwhelmingly used in the whiskey making process. We then checked to see if users preferred whiskeys with a certain ABV level. There wasn't a clear indication that there was a new feature to add with these, but we will confirm they are necessary when we run our hypothesis tests in the next section.
+
+## Hypothesis Testing
 
 
+
+## Classifier Modeling Hypertuning
+
+## Model Evaluation
 
 ## Conclusion & Future Steps
 
