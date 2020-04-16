@@ -137,5 +137,41 @@ The following libraries were used for this project:
 In this repo, you will find the jupyter notebooks that correspond to the steps we followed when building our classifiers. The original csv for our scraped data is included, but you will find at the bottom of each notebook the code to save down a csv the dataset.
 
 ## Data Collection
+*See: data_web_scraping.ipynb
+
+For this project, we scraped data from distillery.com for the available whiskeys. The first step was to get the links for each whiskey's details. We had to browse through results with 50 results on each page and was then able to get the HREF link for each. From there, each link was appended to a list to then start the scraping process. From our list of links, we were able to parse through to get the pertinent values required for our analysis.
+
+We were able to assemble 2,800 observations and saved as a csv to move on to the next stage.
+
+## Data Cleaning
+*See: data_cleaning.ipynb
+
+When we got our data from distillery.com, it came through with unwanted characters, ie '\n', surrounding some of the values in our columns. Before proceeeding to EDA and later modeling, we needed to clean our data up. We removed all of the unwanted characters from the 'name' and 'price' column. Because we are setting out to predict the country of origin for a particular whiskey, we needed to determine that from the distillery location. Once we had the country, we assigned numerical values to proceed.
+
+The country codes are:
+
+    0 - Scotland
+    1 - America
+    2 - Canada
+    3 - Ireland
+    4 - Japan
+    
+The final check we wanted to make was around the 'age' column. Many of our values came in as null. Where some weren't null, they didn't have usable. Because of this, we decided to proceed without age for our current analysis.
+
+From here we'll be working with the 'whiskey_df_clean.csv'.
+
+## EDA & Feature Engineering
+*See: eda_feature_engineering.ipynb
+
+Before we model, we want to understand our data. The first thing to check is our target variable. See below for the distribution of our target variable.
 
 
+
+
+
+
+## Conclusion & Future Steps
+
+## Presentation
+
+[whiskey_sommelier](https://docs.google.com/presentation/d/1ENZpW1YLgLV1PvHDEQKhzcgFzJlfmcALtxzVDWTN5C4/edit#slide=id.g73a2f809fc_2_214)
