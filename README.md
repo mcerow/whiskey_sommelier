@@ -165,7 +165,7 @@ From here we'll be working with the 'whiskey_df_clean.csv'.
 
 Before we model, we want to understand our data. The first thing to check is our target variable. See below for the distribution of our target variable.
 
-
+![](images/target_distribution.png)
 
 
 
