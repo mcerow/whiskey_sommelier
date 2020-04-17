@@ -271,10 +271,6 @@ So we have this amazing model and all this data surrounding whiskey. Our key tak
   * User ratings also vary when comparing one country to another.
   * ABV percentages are another indication for country.
   * Finally, flavor profile differs among the different countries. The flavor profile 'oily' is actually the most significant     feature in our final model.
-  
-  Because the p-value is less than alpha, we reject the null hypothesis that the user scores of whisky bottles coming from all countries are the same. The ANOVA result is showing that there is indeed a significant difference in the user scores. This warrants a post-hoc analysis in order to determine between which countries has these significant differences.
-
-Out of 10 pairwise comparisons, 6 of them have significant differences in terms of user ratings. There are significant differences in terms of user ratings. This can mean that user rating may be a significant feature as predictor of our dependent variable.
 
 Our next steps regarding our automated whiskey sommelier are:
 
