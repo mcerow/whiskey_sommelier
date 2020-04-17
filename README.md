@@ -5,7 +5,9 @@ Bryan Santons, Rajeev Panwar & Maura Cerow
 
 This project aims to build the first module of a comprehensive whisky recommendation engine, an **automated whisky sommelier**. We would like this to act as a go-to "middle-man" between distributors, bars and consumers.
 
-Our target variable in our classifier model is 'country' relating to the country of origin for a given whiskey. The features used include:
+The US whiskey market is expected to grow at a CAGR of 2.4% and the industry faces a lot of competition in the US from other liquor segments. The whiskey market in particular has a low per capita revenues of only $57 per consumer point so there is a lot of room for growth. One of the issues when it comes to entering the whiskey market is that finding the right whiskey for you can be difficult. It can be intimidating to see all the options and not know where to go. With our analysis, the goal is to have an app where a customer can input criteria like price range, certain flavors, user ratings, etc and it will return the options that fit that criteria. Now this is ambitious and we realize that, so our first goal is to prime the underlying data for such an undertaking.
+
+The data used in this project was pulled from https://www.distiller.com.  When we gathered our data, it wasn't ready to be used in such a capacity. It was missing one of the key search functions -- country of origin. Therefore, our target variable in our classifier model is 'country' relating to the country of origin for a given whiskey. The features used include:
   - Type (bourbon, single malt, etc)
   - Price (ranging from 1 to 5 with 5 being the most expensive)
   - Expert Score (critic score)
@@ -35,14 +37,14 @@ Our target variable in our classifier model is 'country' relating to the country
         - poor_performance (whiskeys with a low expert score)
         - people_love_this (whiskeys that have a high user rating and are the most expensive)
 
-The data used in this project was pulled from https://www.distiller.com. 
-
 The questions we're answering in this model - 
   1. Can we confidently classify the country of origin given a set of features?
   2. Do we have an even distribution of data among the 5 countries we're predicting for?
   3. Does price vary depending on the country of origin?
   4. Do expert scores differ between the countries?
-  5. Does the whiskey flavor profile vary from country to country?
+  5. Do users prefer one kind of whiskey over another?
+  6. Does alcohol levels differ between the countries?
+  7. Does the whiskey flavor profile vary from country to country?
     
 The following libraries were used for this project: 
 
@@ -194,14 +196,46 @@ Another indication we wanted to look into was the price & user_rating. One thing
 In addition to these features, we also tracked the cask makeup of our data by country. Oak is overwhelmingly used in the whiskey making process. We then checked to see if users preferred whiskeys with a certain ABV level. There wasn't a clear indication that there was a new feature to add with these, but we will confirm they are necessary when we run our hypothesis tests in the next section.
 
 ## Hypothesis Testing
+*See: hypothesis_testing.ipynb
 
+In our hypothesis testing, we look to answer the questions below:
 
+  * Do we have an even distribution of data among the 5 countries we're predicting for?
+  * Does price vary depending on the country of origin?
+  * Do expert scores differ between the countries?
+  * Do users prefer one kind of whiskey over another?
+  * Does alcohol levels differ between the countries?
+  * Does the whiskey flavor profile vary from country to country?
+  
+The goal of answering these questions is to justify including these features in our model. By running these hypothesis tests, we are attempting to prove that they have statistically significant differences and are therefore useful in determining our output variable.
 
 ## Classifier Modeling Hypertuning
+*See: 
 
 ## Model Evaluation
+*See: 
 
 ## Conclusion & Future Steps
+
+So we have this amazing model and all this data surrounding whiskey. Our key takeaways are:
+
+  * 
+  * Our categories are in fact imbalanced. Because of this, we used SMOTE, TomekLink and other imbalance solutions to correct     the issue. When we originally ran our model without handling the imbalance, our model proved a poor predictor for Canada,
+    Ireland and Japan.
+  * Whiskey prices do in fact vary depending on what country they come from and price is a good indication for whiskey.
+  * User ratings also vary when comparing one country to another.
+  
+  Because the p-value is less than alpha, we reject the null hypothesis that the user scores of whisky bottles coming from all countries are the same. The ANOVA result is showing that there is indeed a significant difference in the user scores. This warrants a post-hoc analysis in order to determine between which countries has these significant differences.
+
+Out of 10 pairwise comparisons, 6 of them have significant differences in terms of user ratings. There are significant differences in terms of user ratings. This can mean that user rating may be a significant feature as predictor of our dependent variable.
+
+Our next steps regarding our automated whiskey sommelier are:
+
+  * Mapping the population and including whiskeys that fall outside the 5 we have so far designated
+  * Adding new features to our model - color, nose & finish
+  * Create a NLP classifier to bucekt customer reviews
+  * Refine our 'x' factor
+  * Build prototype GUI & begin A/B testing 
 
 ## Presentation
 
