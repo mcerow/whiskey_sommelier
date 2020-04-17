@@ -84,7 +84,8 @@ The following libraries were used for this project:
   9. Scipy.stats
   10. Scipy
 
-### Classification Modeling Hypertuning
+### Classification Modeling Baseline & Final Model Evaluation
+##### Same libraries were used for both of these notebooks.
   1. NumPy
   2. Pandas
   3. Metrics from sklearn
@@ -138,9 +139,6 @@ The following libraries were used for this project:
    26. Seaborn
    27. Loadtxt from NumPy
    28. Warnings
-
-### Model Evaluation
-#### TBD
 
 In this repo, you will find the jupyter notebooks that correspond to the steps we followed when building our classifiers. The original csv for our scraped data is included, but you will find at the bottom of each notebook the code to save down a csv the dataset.
 
@@ -249,20 +247,30 @@ For each instance, we compare:
 We ran 98 models. That's a lot to have to tune, so we proceeded with the top 5 models based on the F1 Score in the next notebook.
 
 ## Model Evaluation
-*See: 06_
+*See: 06_hypertuning_final_model_evaluation_selection_final.ipynb
+
+We saved down a csv with our model metrics from the '05_classification_modeling_baseline_final.ipynb' notebook. We want to tune the top 5 models to pick our best one.
+
+Before picking the top 5, we wanted to capture how each of classifiers predicted our model by looking at the average F1 score. Why did we choose to look at the F1 score? Because in this case we want to weight precision and recall equally. Before tuning the hyperparameters, we lay out what parameters we'll be tuning & why.
+
+Ultimately we land on our best model - Random Forest with Random Oversampling. Our F1 Score for this model is 87.3% and the ROC AUC score is 90.7%. Balanced Precision and Recall with .886 and .884 values respectively.
+
+Our model doesn't get everything right. It's good at detecting Scotland, America and Canada, but not as great as predicting Ireland and Japan. They are both classified incorrectly as Scotland the most indicating that based on our current feautures, it is difficult to delineate between these two classes and Scotland. One way we can adjust for this is introducing new features to our dataset. We know that color, aroma and finish are additional features in whiskey that could potentially help classify them.
+
+It is interesting that these top models had different top features in terms of importance. The winning models had the flavor profile: Oily as the top but the other models had one of the categorical cask variables and one of the new features engineered - flavor intesity. This shows the our feature engineering was effective to say the least.
 
 ## Conclusion & Future Steps
 
 So we have this amazing model and all this data surrounding whiskey. Our key takeaways are:
 
-  * Whiskey differs from country to country. Our final model is able to classify whiskey types with an accuracy score of 88.4%     and an F1 score of 86.8%. Country of origin is directly impacted by flavor profile, 
+  * Whiskey differs from country to country. Our final model is able to classify whiskey types with an accuracy score of 88.4%     and an F1 score of 86.8%. Our best model is a Random Forest using Random Oversampling to adjust for class imbalance. 
   * Our categories are in fact imbalanced. Because of this, we used SMOTE, TomekLink and other imbalance solutions to correct     the issue. When we originally ran our model without handling the imbalance, our model proved a poor predictor for Canada,
     Ireland and Japan.
   * Whiskey prices do in fact vary depending on what country they come from and price is a good indication for whiskey.
   * Country expert scores are significantly different one another and it is a useful tool for our classificaiton model.
   * User ratings also vary when comparing one country to another.
-  * 
-  * Finally, 
+  * ABV percentages are another indication for country.
+  * Finally, flavor profile differs among the different countries. The flavor profile 'oily' is actually the most significant     feature in our final model.
   
   Because the p-value is less than alpha, we reject the null hypothesis that the user scores of whisky bottles coming from all countries are the same. The ANOVA result is showing that there is indeed a significant difference in the user scores. This warrants a post-hoc analysis in order to determine between which countries has these significant differences.
 
